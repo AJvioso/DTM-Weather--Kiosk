@@ -9,13 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 const temperature = data.current_weather.temperature;
                 const windspeed = data.current_weather.windspeed;
                 const winddirection = data.current_weather.winddirection;
-                const weathercode = data.current_weather.weathercode;
+                const recordtime = data.current_weather.time;
 
                 weatherElement.innerHTML = `
                     <p>Temperature: ${temperature} °C</p>
                     <p>Windspeed: ${windspeed} km/h</p>
                     <p>Wind Direction: ${winddirection}°</p>
-                    <p>Weather Code: ${weathercode}</p>
+                    <p>Recorded at: ${new Date().toLocaleString('de-DE', { timeZone: "Europe/Berlin" })}</p>
+                   
                 `;
 
                 drawWindDirection(winddirection);
@@ -80,6 +81,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fetch data immediately when the page loads
     fetchWeatherData();
 
-    // Set interval to fetch data every 5 minutes (300,000 milliseconds)
-    setInterval(fetchWeatherData, 300000);
+    // Set interval to fetch data every minute
+    setInterval(fetchWeatherData, 60000);
 });
